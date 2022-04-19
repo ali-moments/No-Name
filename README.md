@@ -1,2 +1,3 @@
-# No-Name
-a simple voice assistant using python and aiml
+# No Name
+just a little voice assistant with some intelligence
+ 
