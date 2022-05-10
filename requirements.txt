@@ -1,9 +1,10 @@
-pyalsaaudio
-PyGObject
-beautifulsoup4
-pyttsx3
-pocketsphinx
-SpeechRecognition
-pyaudio
+python-aiml
 gtts
 pygame
+beautifulsoup4
+pyttsx3
+SpeechRecognition
+pyalsaaudio
+PyGObject
+pocketsphinx
+pyaudio
