@@ -146,10 +146,10 @@ for creating the Soldier's icon in desktop and your application menu, you have t
 - [ ] review scripts and edit them
 - [ ] add more AI files from other robots
 - [ ] add wiki
-- [x] add more pictures for mainwindow
-<!-- add option for random mainwindow animation -->
+- [x] add more pictures for mainwindow <!-- add option for random mainwindow animation -->
 - [ ] maybe an installer?
 - [ ] add soldier-assistant to run script and make .desktop file
 - [ ] pack the scripts to be neat
+- [ ] fix icon
 - [ ] make a script-handler that aiml files call it to run other programs
 <!-- Everything comes together and it becomes easier to edit and more general calls can be made from aiml files to central runner so it'll be easier to support other os-->
