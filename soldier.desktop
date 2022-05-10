@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0.0
+Name=SOLDIER
+Comment=I can talk to you
+Exec=/home/ali/SOLDIER/soldier-assistant
+Icon=/home/ali/SOLDIER/icons/soldier.png
+Encoding=UTF-8
+StartupWMClass=SOLDIER
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Internet;Network;Application;

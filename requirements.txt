@@ -1,0 +1,9 @@
+pyalsaaudio
+PyGObject
+beautifulsoup4
+pyttsx3
+pocketsphinx
+SpeechRecognition
+pyaudio
+gtts
+pygame
