@@ -3,7 +3,7 @@
 The idea to build this robot came from the Iron Man movie. Jarvis, an intelligent robot that talks to Iron Man and obeys his orders. Why don't we have these robots? I do not know, so we can build our own robot.
 I have no idea to choose a name, so I named my robot "No Name". Or maybe I call him Soldier because It looks cool!
 While writing this robot, many ideas came to my mind, but I did not write them all down and I do not remember some of them, so I'll check the project from time to time and add new things.
-This robot is currently designed and implemented on my system and in accordance with the programs installed on my system, so to run this robot on your system, you need to know a little bit of Python and Linux to change it to work on your system.
+This robot is currently designed and implemented on my system and in accordance with the programs installed on my system, so you need to know a little bit of Python and Linux to run this robot on yours and change it to work on your <dfn title="Operation System">os</dfn>.
 This robot absolutely needs to be programmed to behave the way you like. It can do whatever you like, I personally connected my room lamp to the robot with an Arduino board and a bit of wiring, and I can turn the lamp on and off with my own voice But you can do anything else with this robot and add new features. Just write enough script for what you want to do and add it to the robot's brain.
 So if it does something unexpected, do not panic and start reading the source code and look for bugs!!!
 Maybe later I will try to write this robot for other operating systems
