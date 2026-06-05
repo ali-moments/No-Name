@@ -1,6 +1,5 @@
 python-aiml
 gtts
-pygame
 beautifulsoup4
 pyttsx3
 SpeechRecognition

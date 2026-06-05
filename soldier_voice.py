@@ -9,70 +9,80 @@ import aiml
 import os
 import time
 import sys
+import subprocess
+
+class bot : 
+    def __init__(self):
+        self.internet = None 
+  
+
+    def ping(self):
+        
+        try:
+            urlopen('http://google.com', timeout=1)
+            self.internet = "online"
+            return True
+        except URLError as err:
+            self.internet = "offline"
+            return False
 
 
-def ping():
-    global internet
-    try:
-        urlopen('http://google.com', timeout=1)
-        internet = "online"
-        return True
-    except URLError as err:
-        internet = "offline"
-        return False
+    def listen(self):
+        
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            print("I am listening: ")
+            audio = r.listen(source)
+        try:
+            if self.internet == "online":
+                data = r.recognize_google(audio) 
+                print(data)
+                return  data
+            else:
+                data = r.recognize_sphinx(audio)
+                print(data)
+                return  data
+        except sr.UnknownValueError:
+            self.speak("I couldn't understand what you said! Would you like to repeat?")
+            return(self.listen())
+        except sr.RequestError as e:
+            print("Could not request results from speech service; {0}".format(e))
 
-ping()
-if len(sys.argv) > 1 and sys.argv[1] in ["--offline", "offline", "-O"]:
-    internet = "offline"
+    def speak(self , text ,):
+        if self.internet == "online":
+            try :
+                tts = gTTS(text=text, lang='en')
+                tts.save("temp_soundtrack_tts.mp3")
+            except : 
+                raise Exception("Fetch Error")
+            subprocess.run(["ffmpeg" , "-i" , "temp_soundtrack_tts.mp3" , "temp_soundtrack_tts.wav" , "-y"])
+            
+            subprocess.run(["paplay" , "temp_soundtrack_tts.wav"])
+            
+        
 
-def listen():
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("I am listening: ")
-        audio = r.listen(source)
-    try:
-        if internet == "online":
-            print(r.recognize_google(audio))
-            return  r.recognize_google(audio)
+
+    def mainloop(self):
+        self.ping()
+        kernel = aiml.Kernel()
+        if os.path.isfile("bot_brain.brn"):
+            kernel.bootstrap(brainFile = "bot_brain.brn")
         else:
-            print(r.recognize_sphinx(audio))
-            return  r.recognize_sphinx(audio)
-    except sr.UnknownValueError:
-        speak("I couldn't understand what you said! Would you like to repeat?")
-        return(listen())
-    except sr.RequestError as e:
-        print("Could not request results from speech service; {0}".format(e))
+            kernel.bootstrap(learnFiles = "std-startup.xml", commands = "load aiml b")
+            #kernel.saveBrain("bot_brain.brn")
 
-def speak(text, mode=internet):
-    if mode == "online":
-        tts = gTTS(text=text, lang='en')
-        tts.save("temp_soundtrack_tts.mp3")
-        mixer.init()
-        mixer.music.load("temp_soundtrack_tts.mp3")
-        mixer.music.play()
-        while mixer.music.get_busy():
-            time.sleep(1)
-    else:
-        engine = pyttsx3.init()
-        engine.setProperty("voice", engine.getProperty("voices")[1].id)
-        engine.setProperty("rate", 175)
-        engine.say(text)
-        engine.runAndWait()
+        while True:
+            que = self.listen()
+            if que.strip().lower() in ['shutdown','exit','quit','gotosleep','goodbye','terminate']:
+                break
+            res = kernel.respond(que)
+            if res != "":
+                print("Answer: " + res)
+                self.speak(res)
+                
 
 
-kernel = aiml.Kernel()
-if os.path.isfile("bot_brain.brn"):
-    kernel.bootstrap(brainFile = "bot_brain.brn")
-else:
-    kernel.bootstrap(learnFiles = "std-startup.xml", commands = "load aiml b")
-    #kernel.saveBrain("bot_brain.brn")
 
-while True:
-    que = listen()
-    if que.strip().lower() in ['shutdown','exit','quit','gotosleep','goodbye','terminate']:
-        break
-    res = kernel.respond(que)
-    if res != "":
-        print("Answer: " + res)
-        speak(res, internet)
-
+if __name__ == "__main__" : 
+    b = bot() 
+    b.mainloop()
