@@ -28,7 +28,7 @@ Maybe later I will try to write this robot for other operating systems
 ## Installation:
 First, install the required system dependencies:
 ```bash
-sudo apt install libgirepository-2.0-dev libglib2.0-dev libasound2-dev portaudio19-dev libcairo2-dev libcairo2
+sudo apt install libgirepository-2.0-dev libglib2.0-dev libasound2-dev portaudio19-dev libcairo2-dev libcairo2 alsa-utils
 ```
 
 Create a virtual env : 
